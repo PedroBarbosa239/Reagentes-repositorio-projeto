@@ -8,14 +8,19 @@ public class DoorTransition : MonoBehaviour
     [SerializeField]
     private Transform[] spawnPoints;
 
+    private bool isTransitioning = false;
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
             return;
 
-        RoomManager.Instance.ChangeRoom(destinationRoom, spawnPoints);
+        if (isTransitioning)
+            return;
 
-        GameManager.Instance.SaveCheckpoint(
+        isTransitioning = true;
+
+        GameManager.Instance.ChangeRoomWithFade(
             destinationRoom,
             spawnPoints
         );

@@ -9,6 +9,7 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         UpdateUI();
+        Debug.Log(Application.persistentDataPath);
     }
 
    public void UpdateUI()

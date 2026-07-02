@@ -26,14 +26,23 @@ public class GameManager : MonoBehaviour
 
 private void Start()
 {
-    SaveCheckpoint(
-        initialRoom,
-        initialSpawnPoints
-    );
-
-       allWorldItems = FindObjectsByType<WorldItem>(
+    allWorldItems = FindObjectsByType<WorldItem>(
         FindObjectsSortMode.None
     );
+
+    if (GameLoader.LoadSaveOnStart)
+    {
+        GameLoader.LoadSaveOnStart = false;
+
+        LoadGame();
+    }
+    else
+    {
+        SaveCheckpoint(
+            initialRoom,
+            initialSpawnPoints
+        );
+    }
 }
 
 public void RegisterCollectedItem(string itemID)
@@ -52,7 +61,12 @@ public void RegisterCollectedItem(string itemID)
     savedCollectedItems =
         new HashSet<string>(collectedItems);
 
+        
+        SaveGame();
+
         Debug.Log("Checkpoint salvo.");
+
+   
     }
 
 public void PlayerDied()
@@ -112,4 +126,117 @@ private void RestoreWorldItems()
         item.gameObject.SetActive(shouldExist);
     }
 }
+public void ChangeRoomWithFade(
+    GameObject destinationRoom,
+    Transform[] spawnPoints)
+{
+    StartCoroutine(
+        ChangeRoomRoutine(
+            destinationRoom,
+            spawnPoints
+        )
+    );
+}
+
+private IEnumerator ChangeRoomRoutine(
+    GameObject destinationRoom,
+    Transform[] spawnPoints)
+{
+    yield return StartCoroutine(
+        DeathFade.Instance.FadeOut(0.5f)
+    );
+
+    RoomManager.Instance.ChangeRoom(
+        destinationRoom,
+        spawnPoints
+    );
+
+    SaveCheckpoint(
+        destinationRoom,
+        spawnPoints
+    );
+
+    yield return StartCoroutine(
+        DeathFade.Instance.FadeIn(0.5f)
+    );
+}
+
+public void SaveGame()
+{
+    SaveData data = new SaveData();
+
+    data.roomName = savedRoom.name;
+
+    data.spawnIndex = 0;
+
+    foreach(Item item in savedInventory)
+    {
+        data.inventoryItems.Add(
+            item.itemID
+        );
+    }
+
+    foreach(string itemID in savedCollectedItems)
+    {
+        data.collectedItems.Add(
+            itemID
+        );
+    }
+
+    SaveSystem.Save(data);
+}
+
+public void LoadGame()
+{
+    SaveData data = SaveSystem.Load();
+
+    if (data == null)
+    {
+        Debug.Log("Nenhum save encontrado.");
+        return;
+    }
+
+    Debug.Log("Save encontrado!");
+
+    GameObject room =
+        GameObject.Find(data.roomName);
+
+    if (room == null)
+    {
+        Debug.LogError("Sala não encontrada: " + data.roomName);
+        return;
+    }
+
+    Transform spawnA =
+        room.transform.Find("SpawnA");
+
+    Transform spawnB =
+        room.transform.Find("SpawnB");
+
+    if (spawnA == null || spawnB == null)
+    {
+        Debug.LogError(
+            "SpawnA ou SpawnB não encontrados em " +
+            room.name
+        );
+        return;
+    }
+
+    Transform[] spawnPoints =
+    {
+        spawnA,
+        spawnB
+    };
+
+    SaveCheckpoint(
+        room,
+        spawnPoints
+    );
+
+    RoomManager.Instance.ChangeRoom(
+        room,
+        spawnPoints
+    );
+}
+
 }

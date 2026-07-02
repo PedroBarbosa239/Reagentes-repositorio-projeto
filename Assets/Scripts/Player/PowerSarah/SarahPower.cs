@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class SarahPower : MonoBehaviour
 {
     private CharacterManager characterManager;
@@ -109,21 +109,47 @@ public class SarahPower : MonoBehaviour
         }
     }
 
-    void EnterSelectionMode()
+   void EnterSelectionMode()
+{
+    PossessableNPC[] allNPCs =
+        FindObjectsByType<PossessableNPC>(
+            FindObjectsSortMode.None
+        );
+
+    List<PossessableNPC> activeNPCs =
+        new List<PossessableNPC>();
+
+    foreach (PossessableNPC npc in allNPCs)
     {
-        if (npcs.Length == 0)
-            return;
-
-        isSelecting = true;
-
-        characterManager.CanSwitchCharacters = false;
-
-        currentNPC = 0;
-        sarahMovement.SetControlled(false);
-        cameraFollow.target = npcs[currentNPC].transform;
-
-        Debug.Log("Selecionando: " + npcs[currentNPC].npcName);
+        if (npc.gameObject.activeInHierarchy)
+        {
+            activeNPCs.Add(npc);
+        }
     }
+
+    npcs = activeNPCs.ToArray();
+
+    if (npcs.Length == 0)
+    {
+        Debug.Log("Nenhum NPC disponível.");
+        return;
+    }
+
+    isSelecting = true;
+
+    characterManager.CanSwitchCharacters = false;
+
+    currentNPC = 0;
+
+    sarahMovement.SetControlled(false);
+
+    cameraFollow.target = npcs[currentNPC].transform;
+
+    Debug.Log(
+        "Selecionando: " +
+        npcs[currentNPC].npcName
+    );
+}
 
     void NextNPC()
     {
