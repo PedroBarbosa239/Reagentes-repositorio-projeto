@@ -12,6 +12,23 @@ public class DeathFade : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+          SetBlack();
+    }
+
+    // Deixa a tela preta imediatamente
+    public void SetBlack()
+    {
+        Color color = fadeImage.color;
+        color.a = 1f;
+        fadeImage.color = color;
+    }
+
+    // Deixa a tela transparente imediatamente
+    public void SetClear()
+    {
+        Color color = fadeImage.color;
+        color.a = 0f;
+        fadeImage.color = color;
     }
 
     public IEnumerator FadeOut(float duration)

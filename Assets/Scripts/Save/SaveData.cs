@@ -12,4 +12,7 @@ public class SaveData
 
     public List<string> collectedItems =
         new List<string>();
+
+    public List<string> triggeredDialogues =
+    new List<string>();
 }

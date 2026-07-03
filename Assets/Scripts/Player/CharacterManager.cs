@@ -13,6 +13,7 @@ public class CharacterManager : MonoBehaviour
 
     public MovimentPlayer CurrentPlayer => players[currentPlayer];
 
+    public int CurrentPlayerIndex => currentPlayer;
     private void Awake()
     {
         Instance = this;

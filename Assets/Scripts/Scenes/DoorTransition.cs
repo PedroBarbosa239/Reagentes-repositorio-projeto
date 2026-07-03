@@ -25,4 +25,9 @@ public class DoorTransition : MonoBehaviour
             spawnPoints
         );
     }
+
+    private void OnDisable()
+    {
+        isTransitioning = false;
+    }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
+    private GameObject[] allRooms;
     public static RoomManager Instance;
 
     [SerializeField]
@@ -10,23 +11,50 @@ public class RoomManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+         allRooms = GameObject.FindGameObjectsWithTag(
+        "Room"
+    );
+
+    foreach (GameObject room in allRooms)
+{
+    room.SetActive(false);
+}
+
+if (currentRoom != null)
+{
+    currentRoom.SetActive(true);
+}
     }
 
 public void ChangeRoom(GameObject nextRoom, Transform[] spawnPoints)
 {
     Debug.Log("Mudando para sala: " + nextRoom.name);
 
-    if (currentRoom != null)
+    foreach (GameObject room in allRooms)
     {
-        Debug.Log("Desativando: " + currentRoom.name);
-        currentRoom.SetActive(false);
+        room.SetActive(false);
     }
 
-    Debug.Log("Ativando: " + nextRoom.name);
     nextRoom.SetActive(true);
 
-    CharacterManager.Instance.TeleportAllPlayers(spawnPoints);
+    CharacterManager.Instance.TeleportAllPlayers(
+        spawnPoints
+    );
 
     currentRoom = nextRoom;
+}
+
+public GameObject GetRoomByName(string roomName)
+{
+    foreach (GameObject room in allRooms)
+    {
+        if (room.name == roomName)
+        {
+            return room;
+        }
+    }
+
+    return null;
 }
 }

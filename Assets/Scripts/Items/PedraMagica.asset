@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2788a713cf137324281e6db3fd130dda, type: 3}
   m_Name: PedraMagica
   m_EditorClassIdentifier: Assembly-CSharp::Item
+  itemID: pedra
   itemName: PedraMagica
   icon: {fileID: 82522040, guid: 3ed5c77f34a53b14b8ae5b712394fd4f, type: 3}

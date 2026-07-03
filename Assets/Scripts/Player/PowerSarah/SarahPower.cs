@@ -63,7 +63,7 @@ public class SarahPower : MonoBehaviour
         // ===========================
         if (isSelecting)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 ExitSelectionMode();
                 return;
