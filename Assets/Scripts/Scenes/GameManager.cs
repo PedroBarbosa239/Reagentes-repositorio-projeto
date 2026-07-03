@@ -228,7 +228,9 @@ public void SaveGame()
 {
     data.triggeredDialogues.Add(dialogueID);
 }
-
+    // PUZZLE DOS BOTÕES
+    data.activatedButtons =
+        ButtonPuzzleManager.Instance.GetButtonsState();
     SaveSystem.Save(data);
 }
 
@@ -327,6 +329,21 @@ public void LoadGame()
         room,
         spawnPoints
     );
+
+    StartCoroutine(LoadPuzzleAfterRoom(data));
+}
+
+private IEnumerator LoadPuzzleAfterRoom(SaveData data)
+{
+    yield return null;
+    yield return new WaitForEndOfFrame();
+
+    if (ButtonPuzzleManager.Instance != null)
+    {
+        ButtonPuzzleManager.Instance.LoadButtons(
+            data.activatedButtons
+        );
+    }
 }
 
 }

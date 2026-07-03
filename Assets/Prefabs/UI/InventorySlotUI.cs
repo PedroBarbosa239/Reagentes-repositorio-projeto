@@ -4,18 +4,32 @@ using UnityEngine.UI;
 public class InventorySlotUI : MonoBehaviour
 {
     public Image icon;
+    public Button useButton;
 
     public Item currentItem;
 
     public Inventory inventory;
     public InventoryUI inventoryUI;
 
-    public void SetItem(Item item)
+    private void Awake()
     {
-        currentItem = item;
-        icon.sprite = item.icon;
-        icon.enabled = true;
+        if (icon == null)
+            icon = transform.Find("Icon").GetComponent<Image>();
+
+        if (useButton == null)
+            useButton = transform.Find("UseButton").GetComponent<Button>();
     }
+
+   public void SetItem(Item item)
+{
+    currentItem = item;
+
+    icon.sprite = item.icon;
+    icon.enabled = true;
+
+    
+}
+
 
     public void ConsumeItem()
     {
@@ -26,4 +40,6 @@ public class InventorySlotUI : MonoBehaviour
 
         inventoryUI.UpdateUI();
     }
+
+    
 }

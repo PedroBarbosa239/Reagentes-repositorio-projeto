@@ -26,6 +26,8 @@ public class MovimentPlayer : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+
+         
     }
 
     void Update()
@@ -59,6 +61,8 @@ public class MovimentPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
+
+      
 
      if (!isControlled)
     {
@@ -106,7 +110,10 @@ public class MovimentPlayer : MonoBehaviour
 
         bool isWalking = move.magnitude > 0.1f;
 
-        anim.SetBool("isWalking", isWalking);
+        if (anim != null)
+{
+    anim.SetBool("isWalking", isWalking);
+}
 
         if (isWalking)
         {

@@ -15,4 +15,7 @@ public class SaveData
 
     public List<string> triggeredDialogues =
     new List<string>();
+
+    public int buttonsPressed;
+    public bool[] activatedButtons;
 }

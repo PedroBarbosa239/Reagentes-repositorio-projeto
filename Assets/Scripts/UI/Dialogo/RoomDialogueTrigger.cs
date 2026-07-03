@@ -16,7 +16,7 @@ public class RoomDialogueTrigger : MonoBehaviour
 
         if (GameManager.Instance.HasPlayedDialogue(dialogueID))
             yield break;
-
+Debug.Log(GameManager.Instance);
         GameManager.Instance.RegisterDialogue(dialogueID);
 
         yield return StartCoroutine(

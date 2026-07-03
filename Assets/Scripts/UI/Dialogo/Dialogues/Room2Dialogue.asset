@@ -33,15 +33,15 @@ MonoBehaviour:
     text: "Aquele psicopata quando me deixou aqui, disse que sair daqui para mim
       era imposs\xEDvel "
   - characterName: ???
-    text: "Que ele tinha deixado um monte de bot\xE3o escondido e talvez isso ajudaria
-      a sair "
+    text: 'Que ele tinha deixado um monte de cubo estanho escondido e talvez isso
+      ajudaria a sair '
   - characterName: Pedro
-    text: "E voc\xEA sabe onde fica esses bot\xF5es?\r\n"
+    text: "E voc\xEA sabe onde fica esses cubos?\r\n"
   - characterName: ???
-    text: "Tem um aqui a onde eu estou, mas pouco adianta eu apertar, j\xE1 que eu
-      n\xE3o sei onde esta os outros"
+    text: "Tem um aqui a onde eu estou, mas pouco adianta eu tocar eles, j\xE1 que
+      eu n\xE3o sei onde esta os outros"
   - characterName: Sarah
-    text: "Agente acha os bot\xF5es e todos sa\xEDmos daqui"
+    text: "A gente acha os cubos e todos sa\xEDmos daqui"
   - characterName: ???
     text: "N\xE3o"
   - characterName: Sarah

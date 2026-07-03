@@ -23,9 +23,9 @@ public class InventoryToggle : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            inventoryUI.SetActive(!inventoryUI.activeSelf);
-        }
+     //   if (Input.GetKeyDown(KeyCode.Tab))
+       // {
+      //      inventoryUI.SetActive(!inventoryUI.activeSelf);
+      //  }
     }
 }

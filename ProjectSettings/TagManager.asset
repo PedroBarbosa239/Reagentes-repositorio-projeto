@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Ladder
   - Room
+  - NPC
   layers:
   - Default
   - TransparentFX
