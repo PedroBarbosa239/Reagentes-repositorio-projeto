@@ -10,6 +10,12 @@ public class DoorTransition : MonoBehaviour
 
     private bool isTransitioning = false;
 
+   
+[SerializeField]
+private AudioSource portalAudio;
+
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
@@ -18,12 +24,19 @@ public class DoorTransition : MonoBehaviour
         if (isTransitioning)
             return;
 
-        isTransitioning = true;
+   isTransitioning = true;
 
-        GameManager.Instance.ChangeRoomWithFade(
-            destinationRoom,
-            spawnPoints
-        );
+    if (portalAudio != null)
+    {
+        portalAudio.Play();
+        
+    }
+    
+
+    GameManager.Instance.ChangeRoomWithFade(
+        destinationRoom,
+        spawnPoints
+    );
     }
 
     private void OnDisable()

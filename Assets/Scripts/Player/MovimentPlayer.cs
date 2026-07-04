@@ -21,11 +21,13 @@ public class MovimentPlayer : MonoBehaviour
     private bool isOnLadder;
 
     private Animator anim;
+    private AudioSource footstepAudio;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+         footstepAudio = GetComponent<AudioSource>();
 
          
     }
@@ -141,6 +143,22 @@ public class MovimentPlayer : MonoBehaviour
 
             transform.forward = move;
         }
+
+        bool shouldPlayFootsteps =
+    isWalking &&
+    isGrounded &&
+    !isOnLadder;
+
+if (shouldPlayFootsteps)
+{
+    if (!footstepAudio.isPlaying)
+        footstepAudio.Play();
+}
+else
+{
+    if (footstepAudio.isPlaying)
+        footstepAudio.Stop();
+}
     }
 
     void OnCollisionStay(Collision collision)

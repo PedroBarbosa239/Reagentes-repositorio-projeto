@@ -34,11 +34,11 @@ private TMP_Text continueText;
 
     private readonly string[] descriptions =
     {
-        "WASD - Movimentar\n\nE - Trocar personagem\n",
+        "WASD - Movimentar\n\nE - Trocar personagem\n\nSpace - Pular\n",
         
-        "TAB - Abrir Inventário\n\nPedro é responsável por carregar os itens.\n",
+        "Q - Consumir coisas\n",
         
-        "Q - Entrar no modo de possessão\nA/D - Trocar NPC\nSegure Q - Possuir ou retornar\n"
+        "Q - Poder de troca\nA/D - Trocar NPC\nSegure Q(1s) - Possuir ou retornar\n"
     };
 
     private bool showingTutorial = false;

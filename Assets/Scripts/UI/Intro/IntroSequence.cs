@@ -5,7 +5,8 @@ using UnityEngine;
 public class IntroSequence : MonoBehaviour
 {
     public static IntroSequence Instance;
-
+[SerializeField]
+private AudioSource gameMusic;
     [SerializeField]
 private LetterJitter jitter;
 
@@ -47,18 +48,21 @@ public IEnumerator PlayIntro()
 
     yield return new WaitForSeconds(0.5f);
 
-    yield return ShowMessage("SE DIVIRTEM NO MEU MUNDO AGORA", 2.5f, 0.05f);
+    yield return ShowMessage("AGORA BRINQUEM NO MEU MUNDO", 2.5f, 0.05f);
 
     yield return new WaitForSeconds(0.5f);
 
-    yield return ShowMessage("NÃO ME PROCUREM", 3.5f, 0.08f);
+    yield return ShowMessage("NÃO ME PROCUREM MAIS", 3.5f, 0.08f);
 
     yield return new WaitForSeconds(1.2f);
 
     panel.SetActive(false);
 
     isPlaying = false; 
-
+    if (gameMusic != null)
+    {
+        gameMusic.Play();
+    }
     Debug.Log("<<< PlayIntro FIM");
 }
 

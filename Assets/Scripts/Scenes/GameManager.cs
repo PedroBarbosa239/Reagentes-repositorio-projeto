@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private Transform[] initialSpawnPoints;
+        [SerializeField]
+    private AudioSource gameMusic;
     private WorldItem[] allWorldItems;
     private GameObject savedRoom;
     private Transform[] savedSpawnPoints;
@@ -331,6 +333,12 @@ public void LoadGame()
     );
 
     StartCoroutine(LoadPuzzleAfterRoom(data));
+
+    if (gameMusic != null && !gameMusic.isPlaying)
+    {
+        gameMusic.Play();
+        Debug.Log("Música iniciada com sucesso ao carregar o save!");
+    }
 }
 
 private IEnumerator LoadPuzzleAfterRoom(SaveData data)
